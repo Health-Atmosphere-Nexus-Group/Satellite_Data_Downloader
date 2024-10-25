@@ -9,9 +9,9 @@ We support **HRRR**, **GOES-16**, and **Tropomi** data, and we will continue to 
 
 
 **2. Run the Download Script** 
-python3 get_hrrr.py
+:python3 get_hrrr.py
 
 **3. Check Log Page**
 
 **4. Generating Visualizations** 
-python3 get_hrrr_img.py
+:python3 get_hrrr_img.py
