@@ -4,6 +4,7 @@
 This template provides a streamlined workflow for acquiring specific satellite variables, plotting them using Cartopy, and ensuring efficient data management.
 
 We support **HRRR**, **GOES-16**, and **Tropomi** data, and we will continue to add more in the future.
+
 **1. Set Up the Virtual Environment**
 
 
