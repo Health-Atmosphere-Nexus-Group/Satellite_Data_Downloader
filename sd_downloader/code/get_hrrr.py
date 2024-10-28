@@ -1,7 +1,7 @@
 '''
 Author: zhengyi cui
 Date: 2024-10-17 20:09:44
-LastEditTime: 2024-10-22 01:13:58
+LastEditTime: 2024-10-27 9:56:58
 E-mail address: Zhengyi.Cui@uth.tmc.edu
 
 Copyright (c) 2024 by ${Zhengyi.Cui@uth.tmc.edu}, All Rights Reserved. 
@@ -15,18 +15,19 @@ data format: GRIB2
 
 
 
-from herbie import Herbie
+from herbie import FastHerbie
 import herbie 
 import time
 from datetime import timedelta
 from datetime import datetime
 import logging
 import os
-
+import pandas as pd 
 
 save_dir = './data/hrrr'
-start_date = datetime(2023, 4, 9)
-end_date = datetime(2023, 4, 9)
+start_date = datetime(2023, 4, 10)
+end_date = datetime(2023, 4, 12)
+
 
 meterology_index=[
 ':TMP:2 m',#Temperature at 2 m above ground
@@ -78,32 +79,41 @@ def generate_dates(start_date, end_date):
     return date_list
 
 
-def get_data_HRRR(dates, meteorology_index, save_dir):
+def get_data_HRRR(dates, meteorology_index, save_dir, logger):
+
+    fxx = [0]
+
     try:
-        herbie.misc.HerbieLogo2(white_line=False)
-        logger.info('Starting HRRR download by Herbie')
-        for date in dates:
-            for hour in range(0, 24):
-                logger.info(f'Downloading data for {date}/{hour}')
+        if not os.path.exists(save_dir):
+            os.makedirs(save_dir)
+            logger.debug(f'Created save directory: {save_dir}')
 
-                H = Herbie(
-                    model='hrrr',
-                    product='sfc',
-                    fxx=hour,
-                    date=date,
-                    priority='aws'
-                )
+        logger.info('Starting HRRR data download using FastHerbie')
 
-                for i in meteorology_index:
-                    try:
-                        H.download(i, overwrite=True, save_dir=save_dir, errors='raise')
-                        logger.info(f'Successfully downloaded {date}/{hour}/{i}')
-                    except Exception as e:
-                        logger.error(f'Failed to download {date}/{hour}/{i} due to {e}')
-                        continue
-            logger.info(f'Downloading data for {date} completed')
+        for data_type in meteorology_index:
+            logger.info(f'Start Downloading data type: {data_type}')
+            for date_str in dates:
+                try:
+                    logger.info(f'Downloading {data_type} for date: {date_str}')
+                    
+
+                    date_range = pd.date_range(start=date_str, periods=24, freq='1h')
+                    # print(date_range)
+                    FH = FastHerbie(DATES=date_range, model='hrrr', fxx=fxx)
+                    
+                    FH.download(data_type, save_dir=save_dir, overwrite=True)
+                    
+                    logger.info(f'Successfully downloaded {data_type} for date: {date_str}')
+                except Exception as e:
+                    logger.error(f'Failed to download {data_type} for date {date_str}: {e}')
+                    continue 
+
+            logger.info(f'Finished downloading data type: {data_type}')
+
+        logger.info(f'All HRRR data on {dates} downloads completed successfully.')
     except Exception as e:
-        logger.critical(f'Failed to download data due to {e}') 
+        logger.critical(f'Critical error during HRRR data download: {e}')
+
 
 
 if __name__ == "__main__":
@@ -111,4 +121,4 @@ if __name__ == "__main__":
     dates = generate_dates(start_date, end_date)
     if not os.path.exists(save_dir):
         os.makedirs(save_dir)
-    get_data_HRRR(dates,meterology_index,save_dir)
+    get_data_HRRR(dates,meterology_index,save_dir,logger)
