@@ -1,0 +1,27 @@
+NASA FIRMS Data Download
+This script is designed for downloading NASA FIRMS (Fire Information for Resource Management System) data.
+
+Data Sources and Sensors
+NASA FIRMS provides data from three major sensors:
+
+MODIS (Moderate Resolution Imaging Spectroradiometer)
+Resolution: 1 km
+MODIS offers coarse-resolution global fire detection data.
+
+VIIRS (Visible Infrared Imaging Radiometer Suite)
+Resolution: 375 m
+VIIRS provides higher-resolution fire detection data compared to MODIS.
+
+Landsat (Landsat 7, 8, 9)
+Resolution: 30 m
+Depending on different spectral bands, the resolution may vary. For simplicity, it is generally considered 30 m.
+Landsat offers the highest resolution among the three sensors.
+
+Data Format
+All downloaded data will be saved in TXT format.
+The data includes historical records for each respective sensor.
+
+More Information
+For detailed information about the FIRMS data and structure, visit:
+https://nrt3.modaps.eosdis.nasa.gov/archive/FIRMS/
+
