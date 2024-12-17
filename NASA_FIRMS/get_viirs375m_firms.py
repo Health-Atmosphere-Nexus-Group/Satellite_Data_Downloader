@@ -14,7 +14,7 @@ import logging
 import os
 
 ################################ Takeplace your own Token here ################################
-EDL_TOKEN = "eyJ0eXAiOiJKV1QiLCJvcmlnaW4iOiJFYXJ0aGRhdGEgTG9naW4iLCJzaWciOiJlZGxqd3RwdWJrZXlfb3BzIiwiYWxnIjoiUlMyNTYifQ.eyJ0eXBlIjoiVXNlciIsInVpZCI6InpoZW5neWljdWkiLCJleHAiOjE3MzkwNTY4MzMsImlhdCI6MTczMzg3MjgzMywiaXNzIjoiaHR0cHM6Ly91cnMuZWFydGhkYXRhLm5hc2EuZ292IiwiaWRlbnRpdHlfcHJvdmlkZXIiOiJlZGxfb3BzIiwiYXNzdXJhbmNlX2xldmVsIjoyfQ.jW0gs9gabqcfuBL1LU3AJR0fxExzyp4IApc1jWuRRWga7iXa7cUD6YG5cydh_RtxKvxYSVd52x2ksXz4gPSxNxEwtHUxzHDl0G6Rvw2bFSaosavm1N1Us2bjQwEJVt4sDGp5K4t3QYYNVwlclebWxu69IKjYRMEKxVtrktGkW0JhTNxSZG_AiFZAVW9R0_qNkhNc2xD1gZ1yC3RLwOSohv5nMQQsfVYBiaDXNdFRF95nWEbOSjV9L_wZ8K22UwLC97q0esQuPd5xmmyxQABGpXUUaFurBOwsfOJOl1NnP6VphRSCzET2co8gCc8AJRRjava7ICy-ZQ2RDdFDuEIfjA"
+EDL_TOKEN = 
 BASE_URL = "https://nrt3.modaps.eosdis.nasa.gov/archive/FIRMS/noaa-21-viirs-c2/Central_America/"
 SAVE_DIR = "./data/viirs"
 LOG_DIR = './log/download_viirs_data.log'
